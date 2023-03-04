@@ -1,11 +1,11 @@
-var formEl = document.querySelector('#form');
+var formEl = document.querySelector('#searchBtn');
 var cityHistory = document.querySelector('#cityHistory');
 var city = document.querySelector('#query')
 var apiKey = '507cd1329619c9a780d221184056c3ba';
 
 var getCity = function (user) {
     var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q='+ city +'&appid=' + apiKey;
-    console.log('working?')
+    console.log(apiUrl)
     
   
     fetch(apiUrl)
