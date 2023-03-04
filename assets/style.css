@@ -1,0 +1,39 @@
+body {
+    font-family: sans-serif;
+    
+}
+
+.title-bar {
+    display: flex;
+    background-image: linear-gradient(to right, navy , black);
+    color: white;
+    justify-content: space-evenly;
+    font-size: large;
+    
+}
+
+.h1 {
+    justify-content: flex-end;
+    
+}
+
+.h2 {
+    font-weight: bolder;
+}
+
+.searchBar{
+    height: 40px;
+    width: 270px;
+    border-radius: 5px;
+}
+
+#searchBtn {
+    background-color: rgb(104, 129, 212);
+    color: white;
+    margin-top: 10px;
+    width: 270px;
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 5px;
+    border-bottom: 2px black;
+}
