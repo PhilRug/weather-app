@@ -37,3 +37,7 @@ body {
     margin-bottom: 5px;
     border-bottom: 2px black;
 }
+
+#searchResult {
+    background-color: aqua;
+}
