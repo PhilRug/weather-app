@@ -1,10 +1,10 @@
 body {
     font-family: sans-serif;
-    
+    display: flex;
 }
 
 .title-bar {
-    display: flex;
+    width: 100vh;
     background-image: linear-gradient(to right, navy , black);
     color: white;
     justify-content: space-evenly;
@@ -38,6 +38,7 @@ body {
     border-bottom: 2px black;
 }
 
-#searchResult {
+#searchContainer {
     background-color: aqua;
+    
 }

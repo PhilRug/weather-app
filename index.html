@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/style.css"/>
     <title>Weather Forecast</title>
 </head>
 <body>
+    <div col="'is-full"></div>
     <section class="title-bar">
         <h1>Weather Dashboard</h1>
     </section>
 
-    <section class="container" col="4">
+    <section class="column is-one-quarter">
     <form id="form">
         <h2>Search for a City:</h2>
         <input class="searchBar" type="search" id="query" name="q"
@@ -23,9 +25,13 @@
         <ul id="cityHistory"></ul>      
     </section>
 
-    <section class="container" col="8">
-        <span id="searchContainer"></span>
-        <ul id="searchResult"></ul>
+    <section class="column is-two-thirds">
+        <span id="searchContainer">
+        <p id="cityName"></p>
+        <p id="temp1"></p>
+        <p id="wind1"></p>
+        <p id="humid"></p>
+        </span>
     </section>
     <script src="./assets/script.js"></script>
 </body>
