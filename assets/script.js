@@ -39,25 +39,31 @@ var getCity = function (user) {
     let humid = results.list[0].main.humidity;
     humidEl.textContent = 'Humidity: '+humid+'%';
 
-
-    for (var i = 0; i < searchResult.length; i++) {
-      var cityWeather = document.createElement('span');
-      city.textContent = cityName;
-      console.log(results);
-      
-  
-      repoEl.appendChild(titleEl);
-  
-      var statusEl = document.createElement('span');
-      statusEl.classList = 'flex-row align-center';
-  
       
       formEl.appendChild(searchResult);
   
       searchContainerEl.appendChild();
-    }
+
+$.get('https://api.openweathermap.org/data/2.5/forecast?q='+city.value+'&appid='+apiKey, {
+    units: 'imperial'
+  }, function(data) {
+        // Loop through the weather data for the next 5 days
+        for (var i = 0; i < 5; i++) {
+          // Get the date and time for the forecast
+          var forecastDate = new Date(data.list[i].dt_txt);
+          // Create a new <div> element to hold the forecast for this day
+          var forecastDiv = $('<div>');
+          // Set the text for the forecast <div>
+          forecastDiv.text('Date: ' + forecastDate.toDateString() + ', Temperature: ' + data.list[i].main.temp + ' °C');
+          // Add the forecast <div> to the forecast container
+          $('#forecast').append(forecastDiv);
+        }
+      });
+    
   };
 
+
+  
   formEl.addEventListener('click', getCity);
   
   
