@@ -7,7 +7,7 @@ This was my first time doing a solo project with APIs and using Bulma, so it sta
 
 ![homepage](assets/img/homepage.png)
 
-live site can be found at https://github.com/PhilRug/weather-app
+live site can be found at https://philrug.github.io/weather-app/
 
 search bar code was found with https://pagedart.com/blog/how-to-add-a-search-bar-in-html/
 
