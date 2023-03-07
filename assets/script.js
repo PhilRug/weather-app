@@ -48,9 +48,12 @@ var getCity = function () {
 
     
 
-    let weatherIcon = firstForcast.weather.icon;
+    let weatherIcon = firstForcast.weather[0].icon;
+    var iconurl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+    $('#wicon').attr('src', iconurl);
+    document.getElementById('icon').style.display = 'flex';
 
-    cityNameEl.textContent = cityData.name + currentDay + weatherIcon;
+    cityNameEl.textContent = cityData.name+currentDay;
     let temperature = firstForcast.main.temp;
     tempDay1El.textContent = "Temp: "+temperature+ ' °F';
     let wind = firstForcast.wind.speed;
@@ -65,8 +68,9 @@ for (var i = 0; i < forecastList.length; i+= 8) { //try to figure out how to inc
   //if the date changed, create a new element for our 5 day forecast
 } if (date != dayjs().format('D')) {
   const forcastContainer = document.createElement('div');
-  let weatherIcon = firstForcast.weather.icon;
 
+  
+    let weatherIcon = firstForcast.weather[0].icon;
     cityNameEl.textContent = cityData.name + currentDay + weatherIcon;
     let temperature = firstForcast.main.temp;
     tempDay1El.textContent = "Temp: "+temperature+ ' °F';

@@ -84,3 +84,7 @@ h2 {
     
     height: 180px;
 }
+
+#icon {
+    display: none;
+}
