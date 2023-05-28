@@ -88,3 +88,8 @@ h2 {
 #icon {
     display: none;
 }
+
+.forecast-elements-container {
+    display: flex;
+    overflow-x: auto;
+  }

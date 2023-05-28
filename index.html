@@ -24,12 +24,13 @@
          aria-label="Search through site content">
             </form>
         <button id="searchBtn">Search</button>
-        <ul id="cityHistory"></ul>      
+        <div id="cityHistory"></div>      
     </div>
 
 <div class="column is-three-fifths" id="todayWeather">
     <span id="searchContainer">
         <h2 id="cityName"></h2>
+        <h2 id="currentDayEl"></h2>
         <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
             <p id="temp1"></p>
             <p id="wind1"></p>
@@ -40,15 +41,16 @@
 
 <div class="columns">
     <div class="column is-one-quarter" id="search-history">
-        <li></li>
+        <li id="cityHistoryResult"></li>
     </div>
+    
 </div>
 
-<!-- <div class="column is-three-fifths" id="forecast">
+<div class="column is-three-fifths" id="forecast">
     <div id="forecastContainer">
         <h2>5 Day Forecast</h2>
     </div>
-    </div> -->
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
