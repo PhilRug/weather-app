@@ -1,47 +1,53 @@
+:root {
+    --button-color: rgb(104, 129, 212);
+}
+
 body {
-    font-family: sans-serif;    
+    font-family: sans-serif;
     flex-direction: row;
 }
 
 .hero-body {
     width: 100vw;
-    background-image: linear-gradient(to right, rgb(46, 46, 184) , rgba(72, 8, 132, 0.959));
+    background-image: linear-gradient(to right, rgb(46, 46, 184), rgba(72, 8, 132, 0.959));
     color: white;
     justify-content: space-evenly;
     font-size: 30px;
-    font-weight: bolder;    
+    font-weight: bolder;
 }
 
 h1 {
     padding-right: 325px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 h2 {
     font-weight: bolder;
     font-size: larger;
     padding: 3px;
+    text-align: center;
 }
 
-#search-title{
+#search-title {
     font-size: 30px;
     font-weight: bolder;
 }
 
-.searchBar{
+.searchBar {
     height: 60px;
     width: 100%;
     border-radius: 5px;
     margin-left: 3px;
 }
 
-#searchBtn {
-    background-color: rgb(104, 129, 212);
+#searchBtn,
+.history-btn {
+    background-color: var(--button-color);
     color: white;
     margin-top: 10px;
     width: 100%;
     border-radius: 5px;
-    height: 40px;    
+    height: 40px;
     border-bottom: 2px black;
     margin-left: 5px;
     border-bottom-style: solid;
@@ -55,34 +61,32 @@ h2 {
     height: 180px;
 }
 
-#search-box {
+#search-box,
+#cityHistory {
     padding: 15px;
     border-bottom: 5px;
-    border-bottom-style: solid;    
+    list-style: none;
+    
+}
+
+#search-history {
+    padding: 15px;
+    border-bottom: 5px;
+    list-style: none;
+    text-align: center;
 }
 
 #form {
     padding-left: 5px;
 }
 
-#search-history {    
-    width: 325px;
-    border-radius: 5px;
-    height: 100px;    
-    border-top: 2px black;
-    margin-left: 5px;
-    padding-left: 5px;
-    justify-content: center;
-    align-items: center;
-    list-style: none;    
-}
-
 #forecastContainer {
     padding: 15px;
     border-style: solid;
     margin: 15px;
-    
     height: 180px;
+    
+    
 }
 
 #icon {
@@ -92,4 +96,28 @@ h2 {
 .forecast-elements-container {
     display: flex;
     overflow-x: auto;
-  }
+    justify-content: space-around;
+}
+
+
+#cityHistoryResult {
+    list-style: none;
+    padding-left: 0;
+}
+
+.erase-btn {
+    margin-top: 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    
+}
+
+#weather-container {
+    display: flex;
+    flex-direction: column;
+}

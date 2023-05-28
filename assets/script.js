@@ -1,7 +1,6 @@
 var formEl = document.querySelector('#searchBtn');
-var cityHistory = JSON.parse(localStorage.getItem('city')) ?? [];
+var cityHistory = JSON.parse(localStorage.getItem('city')) || [];
 var city = document.querySelector('#query');
-var searchResult = document.querySelector('#searchResult');
 var searchContainerEl = document.querySelector('#searchContainer');
 var cityNameEl = document.querySelector('#cityName');
 var tempDay1El = document.querySelector('#temp1');
@@ -14,7 +13,7 @@ const cityHistoryResult = document.querySelector('#search-history');
 
 var apiKey = '507cd1329619c9a780d221184056c3ba';
 
-var getCity = function() {
+var getCity = function () {
   var apiUrl =
     'https://api.openweathermap.org/data/2.5/forecast?q=' +
     city.value +
@@ -22,16 +21,17 @@ var getCity = function() {
     apiKey +
     '&units=imperial';
   fetch(apiUrl)
-    .then(function(response) {
+    .then(function (response) {
       if (response.ok) {
-        response.json().then(function(data) {
+        response.json().then(function (data) {
           displayWeather(data);
+          addCityHistory(city.value);
         });
       } else {
         alert('Error: ' + response.statusText);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert('Unable to connect to Weather API');
     });
 };
@@ -45,17 +45,40 @@ function addCityHistory(recentCity) {
 }
 
 function displayHistory() {
-  cityHisoryResult.innerHTML = '';
+  cityHistoryResult.innerHTML = '';
+
+  var historyContainer = document.createElement('div');
+
   for (let i = 0; i < cityHistory.length; i++) {
+    let historyItem = document.createElement('li');
     let historyBtn = document.createElement('button');
-    historyBtn.classList.add('btn', 'history-btn');
+    historyBtn.classList.add('history-btn');
     historyBtn.textContent = cityHistory[i];
-    cityHisoryResult.appendChild(historyBtn);
-    historyBtn.addEventListener('click', event => getWeather(cityHistory[i]));
+    historyItem.appendChild(historyBtn);
+    historyContainer.appendChild(historyItem);
+    historyBtn.addEventListener('click', function () {
+      city.value = cityHistory[i];
+      getCity();
+    });
   }
+
+  cityHistoryResult.appendChild(historyContainer);
+
+  var eraseBtn = document.createElement('button');
+  eraseBtn.classList.add('erase-btn');
+  eraseBtn.textContent = 'Erase History';
+  eraseBtn.addEventListener('click', eraseHistory);
+  cityHistoryResult.appendChild(eraseBtn);
 }
 
-var displayWeather = function(results) {
+
+  function eraseHistory() {
+    cityHistory = [];
+    localStorage.removeItem('city');
+    displayHistory();
+  }
+
+var displayWeather = function (results) {
   var cityData = results.city;
   var forecastList = results.list;
   var firstForecast = forecastList[0];
@@ -70,7 +93,8 @@ var displayWeather = function(results) {
   console.log(firstForecast);
 
   let weatherIcon = firstForecast.weather[0].icon;
-  var iconurl = 'http://openweathermap.org/img/w/' + weatherIcon + '.png';
+  var iconurl =
+    'http://openweathermap.org/img/w/' + weatherIcon + '.png';
   $('#wicon').attr('src', iconurl);
   document.getElementById('icon').style.display = 'flex';
 
@@ -82,17 +106,21 @@ var displayWeather = function(results) {
   let humid = firstForecast.main.humidity;
   humidEl.textContent = 'Humidity: ' + humid + '%';
 
-  // 5 day forecast
   forecastContainer.innerHTML = '';
 
   var forecastElementsContainer = document.createElement('div');
   forecastElementsContainer.classList.add('forecast-elements-container');
 
-  for (var i = 0; i < forecastList.length; i += 8) {
+  var forecastDays = [];
+  for (var i = 0; i < forecastList.length; i++) {
     var forecastDay = forecastList[i];
     var date = forecastDay.dt_txt.split(' ')[0];
+    if (
+      !forecastDays.includes(date) &&
+      date !== dayjs().format('YYYY-MM-DD')
+    ) {
+      forecastDays.push(date);
 
-    if (date !== dayjs().format('YYYY-MM-DD')) {
       var forecastElement = document.createElement('div');
       forecastElement.classList.add('forecast-day');
 
@@ -100,11 +128,14 @@ var displayWeather = function(results) {
       dateElement.textContent = dayjs(date).format('M/D/YYYY');
 
       var temperatureElement = document.createElement('p');
-      temperatureElement.textContent = 'Temp: ' + forecastDay.main.temp + ' °F';
+      temperatureElement.textContent =
+        'Temp: ' + forecastDay.main.temp + ' °F';
 
       var weatherIconElement = document.createElement('img');
       weatherIconElement.src =
-        'http://openweathermap.org/img/w/' + forecastDay.weather[0].icon + '.png';
+        'http://openweathermap.org/img/w/' +
+        forecastDay.weather[0].icon +
+        '.png';
 
       forecastElement.appendChild(dateElement);
       forecastElement.appendChild(temperatureElement);
@@ -115,6 +146,7 @@ var displayWeather = function(results) {
   }
 
   forecastContainer.appendChild(forecastElementsContainer);
-};
+}
 
 formEl.addEventListener('click', getCity);
+displayHistory();
